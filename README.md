@@ -1,5 +1,5 @@
 # Cloud-Native-Secure-DevOps-Platform
-
+```bas
 cloud-native-secure-devops-platform/
 │
 ├── src/
@@ -82,3 +82,5 @@ cloud-native-secure-devops-platform/
 │   └── api-spec.yaml
 │
 └── README.md
+
+```

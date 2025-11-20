@@ -1,0 +1,18 @@
+cat > k8s/app/service.yaml <<'YAML'
+apiVersion: v1
+kind: Service
+metadata:
+  name: devsecops-app-svc
+  namespace: production
+  labels:
+    app: devsecops-app
+spec:
+  selector:
+    app: devsecops-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8000
+      name: http
+  type: ClusterIP
+

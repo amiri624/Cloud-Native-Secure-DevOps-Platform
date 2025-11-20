@@ -39,7 +39,6 @@ Every component of modern DevSecOps is implemented:
 ✔️ Automated scanning  
 ✔️ Kubernetes-Hardened workload  
 
----
 
 ## 🏗️ Architecture
 

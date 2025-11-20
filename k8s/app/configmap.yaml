@@ -7,4 +7,4 @@ metadata:
 data:
   APP_ENV: "production"
   LOG_LEVEL: "info"
-YAML
+

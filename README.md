@@ -14,7 +14,7 @@ cloud-native-secure-devops-platform/
 │       └── Makefile
 │
 ├── k8s/
-│   ├── base/
+│   ├── app/
 │   │   ├── deployment.yaml
 │   │   ├── service.yaml
 │   │   ├── configmap.yaml

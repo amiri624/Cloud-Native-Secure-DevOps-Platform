@@ -64,9 +64,7 @@ docs/architecture-diagram.svg
 ## 🔐 Security Model (Zero-Trust)
 
 A full breakdown lives here:
-
 docs/security-model.md
-
 Security layers include:
 
 - Non-root Docker builds  

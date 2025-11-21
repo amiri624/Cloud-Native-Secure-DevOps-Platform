@@ -13,8 +13,6 @@
 
 </div>
 
----
-
 ## 📌 Overview
 
 This project is a complete cloud-native DevSecOps platform, built to demonstrate real-world skills in:

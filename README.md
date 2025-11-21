@@ -160,8 +160,8 @@ cloud-native-secure-devops-platform/
 └── README.md
 
 ```
-# 🔧 Installation & Setup
 
+# 🔧 Installation & Setup
 ## 1) Clone the repository
 `bash
 git clone https://github.com/youruser/cloud-native-secure-devops-platform.git

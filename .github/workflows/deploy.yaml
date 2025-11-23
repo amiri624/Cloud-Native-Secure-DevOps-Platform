@@ -1,0 +1,49 @@
+name: Deploy to Kubernetes
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - "k8s/**"
+      - ".github/workflows/deploy.yaml"
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up kubectl
+        uses: azure/setup-kubectl@v3
+
+      - name: Authenticate to Kubernetes (OIDC)
+        uses: azure/login@v1
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Install kubelogin
+        run: |
+          sudo az aks install-cli
+
+      - name: Get kubeconfig
+        run: |
+          az aks get-credentials \
+            --resource-group ${{ secrets.AKS_RESOURCE_GROUP }} \
+            --name ${{ secrets.AKS_NAME }} \
+            --overwrite-existing
+
+      - name: Apply Manifests
+        run: |
+          kubectl apply -f k8s/app/
+
+      - name: Check Rollout
+        run: |
+          kubectl rollout status deployment/devsecops-app -n production

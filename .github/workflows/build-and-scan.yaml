@@ -1,0 +1,65 @@
+name: Build & Scan
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+
+permissions:
+  contents: read
+  packages: write
+  security-events: write
+  id-token: write  # for cosign
+
+jobs:
+  build-and-scan:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Go (for example)
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.22'
+
+      - name: Run Unit Tests
+        run: go test ./...
+
+      - name: Build app binary
+        run: go build -o app ./cmd/app
+
+      - name: Build Docker image
+        run: |
+          docker build -t ghcr.io/${{ github.repository }}/app:${{ github.sha }} .
+
+      - name: Trivy Scan
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: ghcr.io/${{ github.repository }}/app:${{ github.sha }}
+          severity: HIGH,CRITICAL
+          exit-code: 1
+          ignore-unfixed: true
+
+      - name: Generate SBOM
+        uses: anchore/syft-action@v0.17.0
+        with:
+          image: ghcr.io/${{ github.repository }}/app:${{ github.sha }}
+          format: cyclonedx-json
+          output-file: sbom.json
+
+      - name: Login to GHCR
+        run: echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+      - name: Push Image
+        run: |
+          docker push ghcr.io/${{ github.repository }}/app:${{ github.sha }}
+
+      - name: Install Cosign
+        uses: sigstore/cosign-installer@v3
+
+      - name: Sign Container Image
+        run: |
+          cosign sign ghcr.io/${{ github.repository }}/app:${{ github.sha }} \
+          --keyless

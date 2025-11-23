@@ -1,0 +1,29 @@
+name: Verify Deployment
+
+on:
+  workflow_run:
+    workflows: ["Deploy to Kubernetes"]
+    types:
+      - completed
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Install kubectl
+        uses: azure/setup-kubectl@v3
+
+      - name: Check Pods Health
+        run: |
+          kubectl get pods -n production
+          kubectl wait --for=condition=ready pod -l app=devsecops-app -n production --timeout=120s
+
+      - name: Run Smoke Test
+        run: |
+          kubectl port-forward svc/devsecops-app-svc -n production 8080:80 &
+          sleep 5
+          curl -f http://localhost:8080/health

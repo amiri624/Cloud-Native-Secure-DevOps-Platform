@@ -14,7 +14,7 @@
 
 </div>
 
-## 📌 Overview
+## 🚀 Overview
 
 This project is a complete cloud-native DevSecOps platform, built to demonstrate real-world skills in:
 
@@ -257,6 +257,48 @@ scripts/deploy.sh      → Deploy application
 
 
 📝 License
+
+
+
+🏗 Architecture Diagram
+
+┌──────────────────────────────┐
+                │        Developers             │
+                │      (Code + Git Push)        │
+                └───────────────┬──────────────┘
+                                ↓
+              ┌─────────────────────────────────────┐
+              │              CI Pipeline             │
+              │  - Tests + Lint                      │
+              │  - SAST (Bandit)                     │
+              │  - SCA (Safety)                      │
+              │  - Secrets Check (Gitleaks)          │
+              │  - SBOM (Syft)                       │
+              │  - Image Scan (Trivy)                │
+              └────────────────────┬────────────────┘
+                                   ↓
+               ┌───────────────────────────────────┐
+               │         Secure Container Registry │
+               │         (GHCR – Immutable Tags)   │
+               └────────────────────┬──────────────┘
+                                   ↓
+     ┌────────────────────────────────────────────────────────┐
+     │                 CD / Deployment Pipelines              │
+     │  DEV → Staging → Production (Versioned Promotions)     │
+     └──────────────────────┬─────────────────────────────────┘
+                             ↓
+        ┌────────────────────────────────────────────────┐
+        │              Kubernetes Cluster                 │
+        │  - Namespaces: dev / staging / prod            │
+        │  - Ingress, Service, Deployment                │
+        │  - HPA Autoscaling                             │
+        └───────────────────────────┬────────────────────┘
+                                    ↓
+       ┌────────────────────────────────────────────────┐
+       │        Monitoring & Observability Stack        │
+       │  Prometheus • Grafana • Loki • Alertmanager    │
+       └────────────────────────────────────────────────┘
+
 
 MIT License.
 

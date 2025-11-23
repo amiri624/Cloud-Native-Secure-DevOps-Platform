@@ -3,8 +3,8 @@
 # 🌐 Cloud-Native Secure DevSecOps Platform  
 ### A fully automated, secure, observable, GitOps-driven microservices platform
 
-<div align="center">
 
+<div align="center">
 ![Status](https://img.shields.io/badge/Status-Active-success?style=flat-square)
 ![Kubernetes](https://img.shields.io/badge/Kubernetes-Production--Ready-blue?style=flat-square)
 ![GitOps](https://img.shields.io/badge/GitOps-ArgoCD-orange?style=flat-square)

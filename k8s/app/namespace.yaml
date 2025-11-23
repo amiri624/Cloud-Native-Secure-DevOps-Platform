@@ -1,8 +1,8 @@
-cat > k8s/app/namespace.yaml <<'YAML'
+
 apiVersion: v1
 kind: Namespace
 metadata:
   name: production
   labels:
     name: production
-YAML
+

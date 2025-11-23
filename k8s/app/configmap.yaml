@@ -1,5 +1,4 @@
 
-cat > k8s/app/configmap.yaml <<'YAML'
 apiVersion: v1
 kind: ConfigMap
 metadata:

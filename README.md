@@ -214,18 +214,11 @@ Notify GitOps (ArgoCD auto-sync)
 📊 Observability
 
 Tools:
-
 Prometheus Operator
-
 Grafana
-
 Loki (Optional)
-
 Alertmanager
-
-
 The app exposes /metrics for Prometheus scraping.
-
 
 🛡️ Runtime Security
 

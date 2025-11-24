@@ -204,17 +204,11 @@ docker run -p 8000:8000 devsecops-app
 📦 CI/CD Pipeline
 
 The pipeline (.github/workflows/ci.yml) performs:
-
 Unit testing
-
 Docker image build
-
 Trivy vulnerability scan
-
 SBOM generation
-
 Push to registry
-
 Notify GitOps (ArgoCD auto-sync)
 
 📊 Observability
@@ -231,7 +225,6 @@ Alertmanager
 
 
 The app exposes /metrics for Prometheus scraping.
-
 
 
 🛡️ Runtime Security

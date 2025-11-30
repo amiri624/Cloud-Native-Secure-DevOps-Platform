@@ -1,9 +1,9 @@
 
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: devsecops-app
-  namespace: production
   labels:
     app: devsecops-app
 spec:
@@ -15,47 +15,33 @@ spec:
     metadata:
       labels:
         app: devsecops-app
-      annotations:
-        prometheus.io/scrape: "true"
-        prometheus.io/port: "8000"
     spec:
-      serviceAccountName: app-sa
       containers:
-        - name: app
-          image: devsecops-app:latest   # replace with registry image when you push
-          imagePullPolicy: IfNotPresent
+        - name: devsecops-app
+          image: cloud-native-secure-devops-platform:latest
+          imagePullPolicy: Always
           ports:
-            - containerPort: 8000
-              name: http
+            - containerPort: 8080
           env:
             - name: APP_ENV
+              value: "production"
+            - name: APP_CONFIG
               valueFrom:
                 configMapKeyRef:
-                  name: app-config
-                  key: APP_ENV
-            - name: DB_PASSWORD
-              valueFrom:
-                secretKeyRef:
-  name: app-secrets
-                  key: DB_PASSWORD
-          resources:
-            requests:
-              cpu: "100m"
-              memory: "128Mi"
-            limits:
-              cpu: "500m"
-              memory: "512Mi"
-          livenessProbe:
-            httpGet:
-              path: /health
-              port: 8000
-            initialDelaySeconds: 15
-            periodSeconds: 20
-            timeoutSeconds: 3
+                  name: devsecops-config
+                  key: CONFIG_VALUE
           readinessProbe:
             httpGet:
               path: /health
-              port: 8000
-            initialDelaySeconds: 5
-            periodSeconds: 10
+              port: 8080
+            initialDelaySeconds: 4
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 5
 
+
+---

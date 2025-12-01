@@ -1,0 +1,70 @@
+
+{
+  "id": null,
+  "title": "DevSecOps Cloud-Native App Dashboard",
+  "tags": ["devsecops","kubernetes","cloud-native"],
+  "timezone": "browser",
+  "schemaVersion": 36,
+  "version": 1,
+  "refresh": "10s",
+
+  "panels": [
+
+    {
+      "type": "graph",
+      "title": "CPU Usage (Pods)",
+      "targets": [
+        {
+          "expr": "sum(rate(container_cpu_usage_seconds_total{pod=~\"devsecops-app.*\"}[5m]))",
+          "interval": "",
+          "legendFormat": "CPU"
+        }
+      ]
+    },
+
+    {
+      "type": "graph",
+      "title": "Memory Usage (Pods)",
+      "targets": [
+        {
+          "expr": "sum(container_memory_usage_bytes{pod=~\"devsecops-app.*\"})",
+          "legendFormat": "Memory"
+        }
+      ]
+    },
+
+    {
+      "type": "graph",
+      "title": "HTTP Request Rate",
+      "targets": [
+        {
+          "expr": "rate(http_requests_total{job=\"devsecops-app\"}[1m])",
+          "legendFormat": "req/sec"
+        }
+      ]
+    },
+
+    {
+      "type": "graph",
+      "title": "HTTP Error Rate (4xx/5xx)",
+      "targets": [
+        {
+          "expr": "rate(http_requests_total{status=~\"4..|5..\"}[2m])",
+          "legendFormat": "errors"
+        }
+      ]
+    },
+
+    {
+      "type": "graph",
+      "title": "Pod Restarts",
+      "targets": [
+        {
+          "expr": "sum(kube_pod_container_status_restarts_total{pod=~\"devsecops-app.*\"})",
+          "legendFormat": "restarts"
+        }
+      ]
+    }
+
+  ]
+}

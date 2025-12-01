@@ -13,13 +13,14 @@ Full Production-Ready CI/CD, GitOps, Monitoring & Security Platform on Kubernete
 ⭐️ About This Project
 
 This repository contains a complete, end-to-end enterprise DevOps platform, including:
-
+```bash
 ✔️ Kubernetes microservice
 ✔️ GitOps with ArgoCD
 ✔️ Secure CI/CD pipeline
 ✔️ Monitoring & Alerting (Prometheus + Grafana + Alertmanager)
 ✔️ Zero-Trust Security (Kyverno, Falco, Trivy Operator)
 ✔️ Production-grade manifests, RBAC & Network Policies
+```
 
 This README contains EVERY command you need — from local dev to full cluster deployment.
 

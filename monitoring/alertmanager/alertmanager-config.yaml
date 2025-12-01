@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: alertmanager-config
+  namespace: monitoring
+data:
+  alertmanager.yml: |-
+    global:
+      resolve_timeout: 5m
+    route:
+      receiver: 'team-email'
+      group_by: ['alertname']
+      group_wait: 30s
+      group_interval: 5m
+      repeat_interval: 1h
+    receivers:
+      - name: 'team-email'
+        email_configs:
+          - to: 'alerts@example.com'    # <-- replace
+            from: 'alertmanager@example.com'
+            smarthost: 'smtp.example.com:587'
+            auth_username: 'smtp-user'
+            auth_password: 'SMTP_PASSWORD_PLAINTEXT_OR_SECRET'
+            require_tls: true
+      - name: 'slack-channel'
+        slack_configs:
+          - api_url: 'https://hooks.slack.com/services/XXX/YYY/ZZZ'
+            channel: '#alerts'

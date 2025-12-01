@@ -1,0 +1,32 @@
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: AlertmanagerConfig
+metadata:
+  name: global-receivers
+  namespace: monitoring
+spec:
+  route:
+    receiver: 'team-email'
+    groupBy: ['alertname']
+    groupWait: 30s
+    groupInterval: 5m
+    repeatInterval: 1h
+  receivers:
+    - name: 'team-email'
+      emailConfigs:
+        - to: 'alerts@example.com'      # <-- replace
+          from: 'alertmanager@example.com'
+          smarthost: 'smtp.example.com:587'
+          authUsername: 'smtp-user'
+          authPassword:
+            name: smtp-secret
+            key: password
+          requireTLS: true
+
+    - name: 'slack-channel'
+      slackConfigs:
+        - apiURL:
+            name: slack-webhook-secret
+            key: webhook
+          channel: '#alerts'             # <-- replace
+          title: '{{ template "slack.default.title" . }}'
+  inhibitRules: 

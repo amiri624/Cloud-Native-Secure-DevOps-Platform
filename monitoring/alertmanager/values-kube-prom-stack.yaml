@@ -1,0 +1,12 @@
+prometheus:
+  prometheusSpec:
+    ruleSelectorNilUsesHelmValues: false
+
+alertmanager:
+  enabled: true
+  alertmanagerSpec:
+    # replica: 1  # default
+    routePrefix: / # default
+    externalUrl: ""
+    # receivers and templates may be managed via CRDs (AlertmanagerConfig) or via config secret
+    # We'll enable AlertmanagerConfig CRD usage (recommended)

@@ -1,3 +1,5 @@
+
+---
 name: Build & Scan
 
 on:
@@ -63,3 +65,10 @@ jobs:
         run: |
           cosign sign ghcr.io/${{ github.repository }}/app:${{ github.sha }} \
           --keyless
+
+
+---
+
+
+
+

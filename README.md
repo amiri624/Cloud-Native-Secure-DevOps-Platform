@@ -5,7 +5,7 @@
 
 Full Production-Ready CI/CD, GitOps, Monitoring & Security Platform on Kubernetes
 
-
+```bash
 <div align="center">
 ![Status](https://img.shields.io/badge/Status-Active-success?style=flat-square)
 ![Kubernetes](https://img.shields.io/badge/Kubernetes-Production--Ready-blue?style=flat-square)
@@ -14,11 +14,9 @@ Full Production-Ready CI/CD, GitOps, Monitoring & Security Platform on Kubernete
 ![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)
 
 </div>
+```
 
 
-
-
----
 
 ⭐️ About This Project
 

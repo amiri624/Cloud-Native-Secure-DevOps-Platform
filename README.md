@@ -1,7 +1,6 @@
 
 # Cloud-Native Secure DevOps Platform
 
-
 📘 Cloud-Native Secure DevOps Platform
 
 Full Production-Ready CI/CD, GitOps, Monitoring & Security Platform on Kubernetes

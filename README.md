@@ -1,7 +1,7 @@
 
 # Cloud-Native Secure DevOps Platform
 
-📘 Cloud-Native Secure DevOps Platform
+Cloud-Native Secure DevOps Platform
 Full Production-Ready CI/CD, GitOps, Monitoring & Security Platform on Kubernetes
 
 ```bash
@@ -17,7 +17,7 @@ Full Production-Ready CI/CD, GitOps, Monitoring & Security Platform on Kubernete
 
 
 
-⭐️ About This Project
+About This Project
 
 This repository contains a complete, end-to-end enterprise DevOps platform, including:
 ```bash
@@ -35,7 +35,7 @@ This README contains EVERY command you need — from local dev to full cluster d
 
 ---
 
-🧱 Project Tree
+Project Tree
 ```bash
 Cloud-Native-Secure-DevOps-Platform/
 │
